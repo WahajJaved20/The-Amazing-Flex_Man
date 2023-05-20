@@ -13,7 +13,7 @@ https://github.com/WahajJaved20/The-Amazing-Flex_Man
 
 ![image](https://github.com/WahajJaved20/The-Amazing-Flex_Man/assets/84095994/81dfede5-4779-46bf-9d74-4512bca2978f)
 
-6. Next, Click on Load Unpacked
+6. Next, Click on Load Unpacked (If it shows the error about developer key, dont worry its just my key and wont cause problems)
 
 ![image](https://github.com/WahajJaved20/The-Amazing-Flex_Man/assets/84095994/7e82b1d5-8c9d-461d-9a1a-f83ef37e67e3)
 
