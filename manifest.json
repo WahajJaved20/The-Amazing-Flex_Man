@@ -5,9 +5,10 @@
     "permissions": [
         "activeTab",
         "debugger",
-        "tabs"
+        "tabs",
+        "scripting"
     ],
-    "host_permissions": ["https://flexstudent.nu.edu.pk/Student/StudentMarks?*"],
+    "host_permissions": ["https://flexstudent.nu.edu.pk/Student/StudentMarks"],
     "background": {
       "service_worker": "background.js"
     },
@@ -17,29 +18,13 @@
     },
     "content_scripts": [
       {
-        "matches": ["https://flexstudent.nu.edu.pk/Student/StudentMarks?*"],
+        "matches": ["https://flexstudent.nu.edu.pk/Student/StudentMarks"],
         "js": ["contentScript.js"]
       }
     ],
-    "web_accessible_resources": [
-      {
-        "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png"
-        ],
-        "matches": ["https://flexstudent.nu.edu.pk/Student/StudentMarks?*"]
-      }
-    ],
+    "manifest_version": 3,
     "action": {
-      "default_icon": {
-        "16": "assets/ext-icon.png",
-        "24": "assets/ext-icon.png",
-        "32": "assets/ext-icon.png"
-      },
-      "default_title": "My YT Bookmarks",
-      "default_popup": "popup.html"
-    },
-    "manifest_version": 3
+      "default_popup": "popup.html",
+      "default_icon": "icon_512.png"
+    }
 }
