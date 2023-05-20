@@ -12,6 +12,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     var tables = extractTables(htmlCode);
     var selector = "#accordion"
     const extractedText = extractTextFromElements(htmlCode, selector);
+    clearTableRows()
     const results = makeResultArrays(tables, extractedText);
     populateTable(results, extractedText)
     }
@@ -56,6 +57,11 @@ function extractTables(htmlCode) {
   
   return tableData;
 }
+function clearTableRows() {
+  var tableBody = document.querySelector("#marksTable tbody");
+  tableBody.innerHTML = "";
+}
+
 function extractTextFromElements(htmlCode, selector) {
   const parser = new DOMParser();
   const textData = [];
