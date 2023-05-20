@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.action === "htmlCode") {
     var htmlCode = message.data;
     var tables = extractTables(htmlCode);
-    var selector = ".nav-link.m-tabs__link"
+    var selector = "#accordion"
     const extractedText = extractTextFromElements(htmlCode, selector);
     const results = makeResultArrays(tables, extractedText);
     populateTable(results, extractedText)
@@ -58,16 +58,19 @@ function extractTables(htmlCode) {
 }
 function extractTextFromElements(htmlCode, selector) {
   const parser = new DOMParser();
+  const textData = [];
+
   const doc = parser.parseFromString(htmlCode, "text/html");
   const elements = doc.querySelectorAll(selector);
-  
-  const textData = [];
-  
-  elements.forEach(element => {
-    const text = element.innerText.trim();
+  for (let index = 0; index < elements.length; index++) {
+    const element = elements[index];
+    console.log(element);
+    const ele = element.firstElementChild;
+    console.log(ele);
+    let text = ele.innerText;
     textData.push(text);
-  });
-  
+
+  }
   return textData;
 }
 function makeResultArrays(tables, text) {
