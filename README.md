@@ -19,7 +19,7 @@ https://github.com/WahajJaved20/The-Amazing-Flex_Man
 
 7. Find the Extracted Folder, Open it and press open folder
 
-![Uploading image.png…]
+![image](https://github.com/WahajJaved20/The-Amazing-Flex_Man/assets/84095994/dc78c57e-a230-43bf-b084-ddee2cf8ee0d)
 
 8. Open Flex and Open Marks Tabs
 9. Then in your extensions, click on the extension and press give Summary 
