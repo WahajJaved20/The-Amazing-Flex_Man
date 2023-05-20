@@ -1,30 +1,24 @@
 {
-    "name": "Flex Marks Sum",
-    "version": "0.1.0",
-    "description": "Sums up each course marks",
-    "permissions": [
-        "activeTab",
-        "debugger",
-        "tabs",
-        "scripting"
-    ],
-    "host_permissions": ["https://flexstudent.nu.edu.pk/Student/StudentMarks"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "developer":
-    {
-        "name": "WAHAJ JAVED"
-    },
-    "content_scripts": [
-      {
-        "matches": ["https://flexstudent.nu.edu.pk/Student/StudentMarks"],
-        "js": ["contentScript.js"]
-      }
-    ],
-    "manifest_version": 3,
-    "action": {
-      "default_popup": "popup.html",
-      "default_icon": "icon_512.png"
-    }
+  "name": "Flex Marks Sum",
+  "version": "0.1.0",
+  "description": "Sums up each course marks",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://flexstudent.nu.edu.pk/Student/StudentMarks?*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "developer": {
+    "name": "WAHAJ JAVED"
+  },
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon_512.png"
+  }
 }
