@@ -1,4 +1,5 @@
 # The Amazing Flex Man
+P.S: would love a star btw
 ## Idea : Summing up of total marks so we can see what they dont want us to see
 ## Motivation : CN ni parhi jarhi thi xDDDDD
 ## Steps:
