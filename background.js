@@ -15,5 +15,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         );
       });
     }
+    if (message.action === "generatePDF") {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const activeTab = tabs[0];
+        chrome.runtime.sendMessage({ action: "generatePDF", id: activeTab.id});
+      });
+      
+    }
   });
-  

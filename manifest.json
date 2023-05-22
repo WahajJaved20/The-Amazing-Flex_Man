@@ -5,10 +5,13 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "scripting"
+    "scripting",
+    "downloads",
+    "printing"
   ],
   "host_permissions": [
-    "https://flexstudent.nu.edu.pk/Student/StudentMarks?*"
+    "https://flexstudent.nu.edu.pk/Student/StudentMarks?*",
+    "https://flexstudent.nu.edu.pk/Student/Transcript?*"
   ],
   "background": {
     "service_worker": "background.js"

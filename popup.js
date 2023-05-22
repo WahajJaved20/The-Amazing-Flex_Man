@@ -4,8 +4,11 @@ document.addEventListener("DOMContentLoaded", function() {
   getHtmlButton.addEventListener("click", function() {
     chrome.runtime.sendMessage({ action: "getHTMLCode" });
   });
+  const generatePdfButton = document.getElementById("generate-pdf");
+  generatePdfButton.addEventListener("click", function() {
+      chrome.runtime.sendMessage({ action: "generatePDF"});
 });
-
+})
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message.action === "htmlCode") {
     var htmlCode = message.data;
@@ -15,6 +18,13 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     clearTableRows()
     const results = makeResultArrays(tables, extractedText);
     populateTable(results, extractedText)
+    }
+    if (message.action === "generatePDF") {
+      chrome.printing.print({ printable: generate-pdf.html }, function (result) {
+        var pdfData = result.document;
+        // Process the generated PDF data
+      });
+      
     }
 });
 function populateTable(results, text) {
@@ -99,4 +109,21 @@ function makeResultArrays(tables, text) {
     
   }
   return resultArrays;
+}
+function generatePdf() {
+  console.log("generating PDF");
+// Create a new jsPDF instance
+const doc = new jsPDF();
+
+// Add content to the PDF
+doc.text('Hello, PDF!', 10, 10);
+
+// Save the PDF as a blob
+const pdfBlob = doc.output('blob');
+
+// Create a URL for the PDF blob
+const pdfUrl = URL.createObjectURL(pdfBlob);
+
+// Open the PDF in a new tab for the user to download or view
+window.open(pdfUrl);
 }
