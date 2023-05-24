@@ -20,12 +20,9 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     populateTable(results, extractedText)
     }
     if (message.action === "generatePDF") {
-      chrome.printing.print({ printable: generate-pdf.html }, function (result) {
-        var pdfData = result.document;
-        // Process the generated PDF data
-      });
-      
-    }
+       generatePdf()
+      };
+
 });
 function populateTable(results, text) {
   var tableBody = document.querySelector("#marksTable tbody");
@@ -111,9 +108,13 @@ function makeResultArrays(tables, text) {
   return resultArrays;
 }
 function generatePdf() {
+  var script = document.getElementById("pdfscriptlib");
+  script.src = chrome.runtime.getURL('libs/library.js');
   console.log("generating PDF");
-// Create a new jsPDF instance
-const doc = new jsPDF();
+  script.onload = function() {
+    // The library is loaded and ready to use.
+    // Write your code here that depends on the library.
+    const doc = new jsPDF();
 
 // Add content to the PDF
 doc.text('Hello, PDF!', 10, 10);
@@ -126,4 +127,8 @@ const pdfUrl = URL.createObjectURL(pdfBlob);
 
 // Open the PDF in a new tab for the user to download or view
 window.open(pdfUrl);
+  };
+// Create a new jsPDF instance
+
 }
+

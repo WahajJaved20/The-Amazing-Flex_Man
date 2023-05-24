@@ -16,6 +16,12 @@
   "background": {
     "service_worker": "background.js"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["libs/library.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "developer": {
     "name": "WAHAJ JAVED"
   },
