@@ -113,7 +113,7 @@ function generatePdf(htmlCode) {
   const doc = parser.parseFromString(htmlCode, "text/html");
   const elements = doc.querySelector("table");
   console.log(doc);
-  const lol = "<!DOCTYPE html><html><head><title>Hello, World!</title></head><body><h1>Hello, World!</h1></body></html>"
+  const lol = "<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>"
   // const pageSource = lol;
   // const base64PDF = btoa(pageSource);
 
@@ -124,13 +124,7 @@ function generatePdf(htmlCode) {
   // pdfWindow.document.write('<iframe src="' + pdfData + '" width="100%" height="100%" style="border: none;"></iframe>');
   const pdfWindow = window.open('', '_blank');
   pdfWindow.document.open();
-  pdfWindow.document.write(`
-    <html>
-      <body>
-        ${elements}
-      </body>
-    </html>
-  `);
+  pdfWindow.document.write(htmlCode);
   pdfWindow.document.close();
   pdfWindow.print();
 }
