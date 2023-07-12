@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     populateTable(results, extractedText)
     }
     if (message.action === "generatePDF") {
-       generatePdf()
+       generatePdf(message.data)
       };
 
 });
@@ -107,28 +107,31 @@ function makeResultArrays(tables, text) {
   }
   return resultArrays;
 }
-function generatePdf() {
-  var script = document.getElementById("pdfscriptlib");
-  script.src = chrome.runtime.getURL('libs/library.js');
+function generatePdf(htmlCode) {
+  const parser = new DOMParser();
   console.log("generating PDF");
-  script.onload = function() {
-    // The library is loaded and ready to use.
-    // Write your code here that depends on the library.
-    const doc = new jsPDF();
+  const doc = parser.parseFromString(htmlCode, "text/html");
+  const elements = doc.querySelector("table");
+  console.log(doc);
+  const lol = "<!DOCTYPE html><html><head><title>Hello, World!</title></head><body><h1>Hello, World!</h1></body></html>"
+  // const pageSource = lol;
+  // const base64PDF = btoa(pageSource);
 
-// Add content to the PDF
-doc.text('Hello, PDF!', 10, 10);
+  // const pdfData = "data:application/pdf;base64," + base64PDF;
 
-// Save the PDF as a blob
-const pdfBlob = doc.output('blob');
-
-// Create a URL for the PDF blob
-const pdfUrl = URL.createObjectURL(pdfBlob);
-
-// Open the PDF in a new tab for the user to download or view
-window.open(pdfUrl);
-  };
-// Create a new jsPDF instance
-
+  // // Open the PDF in a new window
+  // const pdfWindow = window.open();
+  // pdfWindow.document.write('<iframe src="' + pdfData + '" width="100%" height="100%" style="border: none;"></iframe>');
+  const pdfWindow = window.open('', '_blank');
+  pdfWindow.document.open();
+  pdfWindow.document.write(`
+    <html>
+      <body>
+        ${elements}
+      </body>
+    </html>
+  `);
+  pdfWindow.document.close();
+  pdfWindow.print();
 }
 

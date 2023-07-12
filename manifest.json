@@ -6,8 +6,7 @@
     "activeTab",
     "tabs",
     "scripting",
-    "downloads",
-    "printing"
+    "downloads"
   ],
   "host_permissions": [
     "https://flexstudent.nu.edu.pk/Student/StudentMarks?*",
@@ -18,7 +17,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["libs/library.js"],
+      "resources": ["libs/jspdf.umd.min.js"],
       "matches": ["<all_urls>"]
     }
   ],
