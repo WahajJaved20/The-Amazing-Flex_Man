@@ -107,24 +107,158 @@ function makeResultArrays(tables, text) {
   }
   return resultArrays;
 }
+function splitString(string) {
+  const parts = string.split(/\s{2,}/);
+  return parts;
+}
+function getTextAfterColon(string) {
+  const parts = string.split(":");
+  const textAfterColon = parts.length > 1 ? parts[1].trim() : "";
+  return textAfterColon;
+}
 function generatePdf(htmlCode) {
   const parser = new DOMParser();
   console.log("generating PDF");
   const doc = parser.parseFromString(htmlCode, "text/html");
-  const elements = doc.querySelector("table");
-  console.log(doc);
-  const lol = "<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>"
-  // const pageSource = lol;
-  // const base64PDF = btoa(pageSource);
+  const elements = doc.querySelectorAll("div.m-portlet__body");
+  var resolvedArray=[]
+  var headings = ["Code","CourseName","Crd","Pnt","Grd","Rmk"]
+  for (let index = 0; index < elements.length; index++) {
+    const element = elements[index];
+    const ele = element.firstElementChild;
+    let text = ele.innerText;
+    var array = text.split('\n');
+    const filteredArray = array
+  .filter(item => item.trim() !== "")
+  .map(item => item.trim());
+  resolvedArray.push(filteredArray);
+  }
+  const userInformation = resolvedArray[0];
+  const transcriptInformation = [];
+let currentKeyword = "";
+let currentArray = [];
+const keywords = ["Fall", "Spring", "Summer"];
+for (const item of resolvedArray[1]) {
+  const foundKeyword = keywords.find(keyword => item.includes(keyword));
+  if (foundKeyword) {
+    if (currentArray.length > 0) {
+      transcriptInformation.push([currentKeyword, ...currentArray]);
+      currentArray = [];
+    }
+    currentKeyword = item;
+  } else {
+    currentArray.push(item);
+  }
+}
+if (currentArray.length > 0) {
+  transcriptInformation.push([currentKeyword, ...currentArray]);
+}
+console.log(userInformation);
+console.log(transcriptInformation);
+const htmlcode = `
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .table-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    td.course {
+      max-width: 200px;
+      overflow: hidden;
+      padding-right: 10px;
+    }
+    caption{
+      padding-bottom: 5px;
+    }
+    table {
+      font-size: 8px;
+      border-collapse: collapse;
+      width: 200px;
+      margin-bottom: 20px;
+      border: 1px solid black;
+    }
+    td {
+      white-space: nowrap;
+      padding-right: 10px;
+    }
+    th {
+      border-bottom: 1px solid black;
+      padding: 4px;
+      text-align: left;
+    }
+    p {
+      font-size: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+  </div>
+</body>
+</html>`;
+const tempContainer = document.createElement('div');
+tempContainer.innerHTML = htmlcode;
+// START LOOPING
+for(let i=0;i<transcriptInformation.length;i++){
+  const semester = transcriptInformation[i][0];
+  const creds = transcriptInformation[i][1];
+  const gpa = transcriptInformation[i][2];
+  const divElement = document.createElement('div');
+  divElement.className = 'flex flex-col';
+  const tableElement = document.createElement('table');
+  const caption = document.createElement('caption');
+  caption.innerText=semester;
+  tableElement.appendChild(caption);
+  const row = document.createElement('tr');
+  for(let j=0;j<headings.length;j++){
+    const head = document.createElement('th');
+    head.innerText = headings[j];
+    row.appendChild(head);
+  }
+  tableElement.appendChild(row);
+  for(let j=11;j<transcriptInformation[i].length;j+=7){
+    const contentRow = document.createElement('tr');
+    for(let k=0;k<6;k++){
+      if(k==2){
+        continue;
+      }
+      const head = document.createElement('td');
+      if(k==1){
+        head.className = "course";
+      }
+      head.innerText = transcriptInformation[i][j+k];
+      contentRow.appendChild(head);
+    }
+    tableElement.appendChild(contentRow);
+  }
+  const contentRow = document.createElement('tr');
+  const head = document.createElement('td');
+  head.innerText = " ";
+  contentRow.appendChild(head);
+  tableElement.appendChild(contentRow);
+  divElement.appendChild(tableElement);
+  const para = document.createElement('p');
+  para.style.whiteSpace = "pre";
+  const strings = splitString(creds)
+  const gpas = splitString(gpa)
+  para.innerText = `Credits Attempted:              ${getTextAfterColon(strings[0])}                                      GPA:       ${getTextAfterColon(gpas[0])}`;
+  divElement.appendChild(para);
+  const para2 = document.createElement('p');
+  para2.style.whiteSpace = "pre";
+  para2.innerText = `Credits Earned:                    ${getTextAfterColon(strings[1])}                                      CGPA:    ${getTextAfterColon(gpas[1])}`;
+  divElement.appendChild(para2);
+  tempContainer.children[1].appendChild(divElement);
+}
 
-  // const pdfData = "data:application/pdf;base64," + base64PDF;
+const htmlString = tempContainer.innerHTML;
 
-  // // Open the PDF in a new window
-  // const pdfWindow = window.open();
-  // pdfWindow.document.write('<iframe src="' + pdfData + '" width="100%" height="100%" style="border: none;"></iframe>');
+
+  const pageSource = htmlString;
   const pdfWindow = window.open('', '_blank');
   pdfWindow.document.open();
-  pdfWindow.document.write(htmlCode);
+  pdfWindow.document.write(pageSource);
   pdfWindow.document.close();
   pdfWindow.print();
 }
