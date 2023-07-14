@@ -1,8 +1,17 @@
 # The Amazing Flex Man
 P.S: would love a star btw
-## Idea : Summing up of total marks so we can see what they dont want us to see
 ## Motivation : CN ni parhi jarhi thi xDDDDD
+### Idea : Summing up of total marks so we can see what they dont want us to see
+
+# Version 2.0: Now you can generate PDF transcripts as well.
 ## Steps:
+1. Login your Flex Account.
+2. On the Home Page, Click on the Extension then press, *Get User Information*
+3. Once the button turns green, go to Transcript page, then press *Get Transcript*
+4. And Voila, just press Ctrl + P to go into the A4 page size print view.
+5. In the Destination dropdown, you can click Save to PDF, to save it. :D
+
+## Steps Of Installation:
 1. Download the Zip File from the Github Page
 
 https://github.com/WahajJaved20/The-Amazing-Flex_Man
