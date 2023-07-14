@@ -157,7 +157,7 @@ function generateInformation(){
   .map(item => item.trim());
   resolvedArray.push(filteredArray);
   }
-  return [resolvedArray[0][5],resolvedArray[1][2]]
+  return [resolvedArray[0][5],resolvedArray[1][2],resolvedArray[0][2]]
 }
 function generatePdf() {
   const htmlCode = activeTabData;
@@ -291,6 +291,7 @@ const htmlcode = `
 <img src="assets/nuces.png" width="100" height="100"/>
 <div><h1> NATIONAL <br/> UNIVERSITY</h1> <div class="he" > of Computer and Emerging Sciences </div><br/><div class="heh" > Karachi Campus </div></div>
 </div>
+<div class="info" ></div>
 <body>
   <div class="table-container">
   </div>
@@ -300,6 +301,28 @@ const htmlcode = `
 </html>`;
 const tempContainer = document.createElement('div');
 tempContainer.innerHTML = htmlcode;
+const infoRowOne = document.createElement('div');
+infoRowOne.className = "flex flex-row"
+const stName = document.createElement('span');
+stName.innerText = userInformation[2]
+const roll = document.createElement('span');
+roll.innerText = userInformation[1];
+infoRowOne.appendChild(stName);
+infoRowOne.appendChild(roll);
+tempContainer.children[2].appendChild(infoRowOne);
+const infoRowTwo = document.createElement('div');
+infoRowTwo.className = "flex flex-row"
+let dob = getTextAfterColon(studentInformation[1])
+const birth = document.createElement('span');
+birth.innerText = `Date of Birth: ${dob}`
+const degree = document.createElement('span');
+degree.innerText = `Degree: ${getTextAfterColon(studentInformation[2])}`
+infoRowTwo.appendChild(birth);
+infoRowTwo.appendChild(degree);
+tempContainer.children[2].appendChild(infoRowTwo)
+const regNp = document.createElement('span');
+regNp.innerText = `Univ. Reg. No: ${getTextAfterColon(userInformation[1])}`
+tempContainer.children[2].appendChild(regNp)
 // START LOOPING
 for(let i=0;i<transcriptInformation.length;i++){
   const semester = transcriptInformation[i][0];
@@ -349,7 +372,7 @@ for(let i=0;i<transcriptInformation.length;i++){
   para2.style.whiteSpace = "pre";
   para2.innerText = `   Credits Earned:                    ${getTextAfterColon(strings[1])}                                                     CGPA:    ${getTextAfterColon(gpas[1])}`;
   divElement.appendChild(para2);
-  tempContainer.children[2].appendChild(divElement);
+  tempContainer.children[3].appendChild(divElement);
 }
 const firstCol = document.createElement("div");
 firstCol.className = "flex flex-col"
@@ -386,7 +409,7 @@ const seventhSpan = document.createElement("span");
 seventhSpan.innerText = `Credits Completed:    ${getTextAfterColon(finalcreds[1])}`
 thirdRow.appendChild(seventhSpan);
 firstCol.appendChild(thirdRow)
-tempContainer.children[3].appendChild(firstCol);
+tempContainer.children[4].appendChild(firstCol);
 const htmlString = tempContainer.innerHTML;
 
   const pageSource = htmlString;
