@@ -5,14 +5,24 @@
   "permissions": [
     "activeTab",
     "tabs",
-    "scripting"
+    "scripting",
+    "downloads",
+    "storage"
   ],
   "host_permissions": [
-    "https://flexstudent.nu.edu.pk/Student/StudentMarks?*"
+    "https://flexstudent.nu.edu.pk/Student/StudentMarks?*",
+    "https://flexstudent.nu.edu.pk/Student/Transcript?*",
+    "https://flexstudent.nu.edu.pk/?*"
   ],
   "background": {
     "service_worker": "background.js"
   },
+  "web_accessible_resources": [
+    {
+      "resources": ["libs/jspdf.umd.min.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "developer": {
     "name": "WAHAJ JAVED"
   },
