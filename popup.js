@@ -159,6 +159,16 @@ function generateInformation(){
   }
   return [resolvedArray[0][5],resolvedArray[1][2],resolvedArray[0][2]]
 }
+function formatDate(dateString) {
+  const dateParts = dateString.split('/');
+  const month = parseInt(dateParts[0], 10) - 1; // Subtract 1 to match JavaScript's month index (0-11)
+  const day = parseInt(dateParts[1], 10);
+  const year = parseInt(dateParts[2], 10);
+  
+  const formattedDate = new Date(year, month, day).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  
+  return formattedDate;
+}
 function generatePdf() {
   const htmlCode = activeTabData;
   const parser = new DOMParser();
@@ -305,6 +315,7 @@ const infoRowOne = document.createElement('div');
 infoRowOne.className = "flex flex-row"
 const stName = document.createElement('span');
 stName.innerText = userInformation[2]
+stName.style.marginRight = "150px"
 const roll = document.createElement('span');
 roll.innerText = userInformation[1];
 infoRowOne.appendChild(stName);
@@ -314,7 +325,8 @@ const infoRowTwo = document.createElement('div');
 infoRowTwo.className = "flex flex-row"
 let dob = getTextAfterColon(studentInformation[1])
 const birth = document.createElement('span');
-birth.innerText = `Date of Birth: ${dob}`
+birth.innerText = `Date of Birth: ${formatDate(dob)}`
+birth.style.marginRight = "135px"
 const degree = document.createElement('span');
 degree.innerText = `Degree: ${getTextAfterColon(studentInformation[2])}`
 infoRowTwo.appendChild(birth);
@@ -417,5 +429,4 @@ const htmlString = tempContainer.innerHTML;
   pdfWindow.document.open();
   pdfWindow.document.write(pageSource);
   pdfWindow.document.close();
-  pdfWindow.print();
 }
