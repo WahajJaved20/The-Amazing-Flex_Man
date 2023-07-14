@@ -10,7 +10,9 @@ P.S: would love a star btw
 3. Once the button turns green, go to Transcript page, then press *Get Transcript*
 4. And Voila, just press Ctrl + P to go into the A4 page size print view.
 5. In the Destination dropdown, you can click Save to PDF, to save it. :D
-
+Sample Output:
+![image](https://github.com/WahajJaved20/The-Amazing-Flex_Man/assets/84095994/9be4c7b4-f13c-447e-aea6-aab5b8ed42f9)
+Pic Creds: @Mohsin_Ali_Mirza
 ## Steps Of Installation:
 1. Download the Zip File from the Github Page
 
