@@ -6,11 +6,13 @@
     "activeTab",
     "tabs",
     "scripting",
-    "downloads"
+    "downloads",
+    "storage"
   ],
   "host_permissions": [
     "https://flexstudent.nu.edu.pk/Student/StudentMarks?*",
-    "https://flexstudent.nu.edu.pk/Student/Transcript?*"
+    "https://flexstudent.nu.edu.pk/Student/Transcript?*",
+    "https://flexstudent.nu.edu.pk/?*"
   ],
   "background": {
     "service_worker": "background.js"
