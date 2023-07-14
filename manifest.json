@@ -1,6 +1,6 @@
 {
   "name": "The Amazing Flex Man",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sums up each course marks",
   "permissions": [
     "activeTab",
