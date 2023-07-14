@@ -378,11 +378,11 @@ for(let i=0;i<transcriptInformation.length;i++){
   para.style.whiteSpace = "pre";
   const strings = splitString(creds)
   const gpas = splitString(gpa)
-  para.innerText = `   Credits Attempted:              ${getTextAfterColon(strings[0])}                                                     GPA:       ${getTextAfterColon(gpas[0])}`;
+  para.innerText = `   Credits Attempted:              ${getTextAfterColon(strings[0])}                                                     GPA:       ${getTextAfterColon(gpas[1])}`;
   divElement.appendChild(para);
   const para2 = document.createElement('p');
   para2.style.whiteSpace = "pre";
-  para2.innerText = `   Credits Earned:                    ${getTextAfterColon(strings[1])}                                                     CGPA:    ${getTextAfterColon(gpas[1])}`;
+  para2.innerText = `   Credits Earned:                    ${getTextAfterColon(strings[1])}                                                     CGPA:    ${getTextAfterColon(gpas[0])}`;
   divElement.appendChild(para2);
   tempContainer.children[3].appendChild(divElement);
 }
