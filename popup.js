@@ -363,7 +363,13 @@ for(let i=0;i<transcriptInformation.length;i++){
       if(k==1){
         head.className = "course";
       }
-      head.innerText = transcriptInformation[i][j+k];
+      if(k == 4){
+        head.innerText = transcriptInformation[i][j+k+1];
+      }else if( k==5) {
+        head.innerText = transcriptInformation[i][j+k-1];
+      }else{
+        head.innerText = transcriptInformation[i][j+k];
+      }
       contentRow.appendChild(head);
     }
     tableElement.appendChild(contentRow);
