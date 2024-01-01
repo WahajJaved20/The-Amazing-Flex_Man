@@ -53,7 +53,7 @@ function populateTable(results, text) {
   var tableBody = document.querySelector("#marksTable tbody");
     for (var i = 0; i < results.length; i++) {
       var row = document.createElement("tr");
-      for (var j = 0; j < 3; j++) {
+      for (var j = 0; j < 4; j++) {
         var cell = document.createElement("td");
         cell.textContent = results[i][j];
         row.appendChild(cell);
@@ -102,12 +102,9 @@ function extractTextFromElements(htmlCode, selector) {
   const elements = doc.querySelectorAll(selector);
   for (let index = 0; index < elements.length; index++) {
     const element = elements[index];
-    console.log(element);
     const ele = element.firstElementChild;
-    console.log(ele);
     let text = ele.innerText;
     textData.push(text);
-
   }
   return textData;
 }
@@ -116,13 +113,27 @@ function makeResultArrays(tables, text) {
   let courseIndex = 0;
   let totalMarks = parseFloat("0");
   let obtainedMarks = parseFloat("0");
+  let averageMarks = parseFloat("0");
   for (let index = 0; index < tables.length; index++) {
     const element = tables[index];
+    console.log(element)
+    for (let insider = 1; insider < element.length - 1; insider++) {
+      let weight = parseFloat(element[insider][1]);
+      let marks = parseFloat(element[insider][3]);
+      let avg = parseFloat(element[insider][4]);
+      if( weight == 0 || marks == 0 || avg == 0){
+        continue;
+      }
+      let ratio = parseFloat(avg/marks)
+      averageMarks += ratio * weight;
+
+    }
     const finalElement = element[element.length - 1];
     if (finalElement[0] === "Total Marks") {
-      resultArrays.push([text[courseIndex], totalMarks.toFixed(2), obtainedMarks.toFixed(2)]);
+      resultArrays.push([text[courseIndex], totalMarks.toFixed(2), obtainedMarks.toFixed(2), averageMarks.toFixed(2)]);
       totalMarks = 0;
       obtainedMarks = 0;
+      averageMarks = 0;
       courseIndex++;
     }else{
       totalMarks += parseFloat(finalElement[1]);
