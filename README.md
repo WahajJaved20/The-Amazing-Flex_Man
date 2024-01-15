@@ -1,8 +1,10 @@
 # The Amazing Flex Man
 P.S: would love a star btw
 ## Motivation : CN ni parhi jarhi thi xDDDDD
+## Life update: version 3 k time AML ni parhi jarhi thi (KABHI MAT LENA YE COURSE)
 ### Idea : Summing up of total marks so we can see what they dont want us to see
-
+# Version 3.0: Now, you can view the class average as well.
+just click on calculate summary and it will be calculated
 # Version 2.0: Now you can generate PDF transcripts as well.
 ## Steps:
 1. Login your Flex Account.
