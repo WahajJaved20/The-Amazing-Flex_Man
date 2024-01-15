@@ -110,17 +110,17 @@ function extractTextFromElements(htmlCode, selector) {
 }
 function makeResultArrays(tables, text) {
   const resultArrays = [];
+  console.log(tables)
   let courseIndex = 0;
   let totalMarks = parseFloat("0");
   let obtainedMarks = parseFloat("0");
   let averageMarks = parseFloat("0");
   for (let index = 0; index < tables.length; index++) {
     const element = tables[index];
-    console.log(element)
     for (let insider = 1; insider < element.length - 1; insider++) {
-      let weight = parseFloat(element[insider][1]);
-      let marks = parseFloat(element[insider][3]);
-      let avg = parseFloat(element[insider][4]);
+      let weight = parseFloat(element[insider][1]) ? parseFloat(element[insider][1]) : 0;
+      let marks = parseFloat(element[insider][3]) ? parseFloat(element[insider][3]) : 0;
+      let avg = parseFloat(element[insider][4]) ? parseFloat(element[insider][4]) : 0;
       if( weight == 0 || marks == 0 || avg == 0){
         continue;
       }
@@ -129,12 +129,19 @@ function makeResultArrays(tables, text) {
 
     }
     const finalElement = element[element.length - 1];
+    console.log(finalElement)
     if (finalElement[0] === "Total Marks") {
       resultArrays.push([text[courseIndex], totalMarks.toFixed(2), obtainedMarks.toFixed(2), averageMarks.toFixed(2)]);
       totalMarks = 0;
       obtainedMarks = 0;
       averageMarks = 0;
       courseIndex++;
+    } else if(finalElement[0] === "100.00" || finalElement[0] === "99.00"){
+      resultArrays.push([text[courseIndex], finalElement[0], finalElement[1], finalElement[2]])
+      courseIndex++;
+      totalMarks = 0;
+      obtainedMarks = 0;
+      averageMarks = 0;
     }else{
       totalMarks += parseFloat(finalElement[1]);
       obtainedMarks += parseFloat(finalElement[2]);
