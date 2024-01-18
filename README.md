@@ -6,6 +6,7 @@ P.S: would love a star btw
 # Version 3.0: Now, you can view the class average as well.
 just click on calculate summary and it will be calculated
 # Version 2.0: Now you can generate PDF transcripts as well.
+# Version 3.0.1: Small bug resolved when all course marks were uploaded
 ## Steps:
 1. Login your Flex Account.
 2. On the Home Page, Click on the Extension then press, *Get User Information*
