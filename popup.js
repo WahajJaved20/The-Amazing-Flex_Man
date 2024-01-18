@@ -99,6 +99,7 @@ function extractTextFromElements(htmlCode, selector) {
   const textData = [];
 
   const doc = parser.parseFromString(htmlCode, "text/html");
+  console.log(doc)
   const elements = doc.querySelectorAll(selector);
   for (let index = 0; index < elements.length; index++) {
     const element = elements[index];
@@ -165,7 +166,7 @@ function generateInformation(){
   const doc = parser.parseFromString(htmlCode, "text/html");
   const elements = doc.querySelectorAll("div.m-portlet__body");
   var resolvedArray = []
-  for (let index = 0; index < 2; index++) {
+  for (let index = 0; index < elements.length; index++) {
     const element = elements[index];
     const ele = element.firstElementChild;
     let text = ele.innerText;
@@ -175,7 +176,7 @@ function generateInformation(){
   .map(item => item.trim());
   resolvedArray.push(filteredArray);
   }
-  return [resolvedArray[0][5],resolvedArray[1][2],resolvedArray[0][2]]
+  return [resolvedArray[0][5],resolvedArray[2][2],resolvedArray[0][2]]
 }
 function formatDate(dateString) {
   const dateParts = dateString.split('/');
